@@ -7,6 +7,8 @@
 ##### 4.user-service:7771
 ##### 5.zuul-service:8762
 ##### 6.product-service:7772
+##### 7.cart-service:7773
+##### 8.order-service:7774
 
 ## 2.View Eureka Registry at url http://localhost:8761 in Google Chrome or Firefox browser 
 
@@ -15,8 +17,8 @@
   Request Body:--
   
   {
-  "username": "amit123",
-  "email": "amit156231@gmail.com",
+  "username": "rambo123",
+  "email": "rmb-john@gmail.com",
   "password": "password",
   "roles": [
     "ADMIN"
@@ -31,7 +33,7 @@
 ###  Also User can signin at url POST http://localhost:8762/users/signin with below Request Body to get above token 
   
   Request Body:-
-       {"username":"amitebers",
+       {"username":"rambo123",
          "password":"passwords"}
  
   
