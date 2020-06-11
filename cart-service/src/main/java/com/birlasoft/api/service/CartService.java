@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.birlasoft.api.commons.Product;
 import com.birlasoft.api.commons.Request;
-import com.birlasoft.api.commons.User;
 import com.birlasoft.api.entity.Cart;
 import com.birlasoft.api.repository.CartRepository;
 
@@ -28,7 +27,7 @@ public class CartService {
 	
 	static String username;
 	public Cart addInCart(Request	 request) {
-		User user=new User(125,"gupta");
+	
 		//call rest api of getproduct by id . here using test methodg
 		
 		List<ServiceInstance> instances=discoveryClient.getInstances("product-service");

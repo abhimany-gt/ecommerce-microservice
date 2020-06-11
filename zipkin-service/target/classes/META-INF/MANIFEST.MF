@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: zipkin-service
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Shruti
+Implementation-Vendor-Id: com.birlasoft
+Build-Jdk: 1.8.0_241
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/zipkin-service
+Created-By: Maven Integration for Eclipse
+
