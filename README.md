@@ -1,4 +1,4 @@
-# Shopping Microservices
+# Ecommerce Microservices
 
 ## 1.After cloning the repository run services in following sequence
 ##### 1.eureka-service:8761
