@@ -2,35 +2,35 @@ package com.birlasoft.api.commons;
 
 public class Request {
 
-	private String userName;
+	private int productId;
 
-	public Request(String userName) {
+	public Request(int productId) {
 		super();
-		this.userName = userName;
+		this.productId = productId;
 	}
 
 	public Request() {
 		super();
 	}
 
-	public String getUserName() {
-		return userName;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	@Override
 	public String toString() {
-		return "Request [userName=" + userName + "]";
+		return "Request [productId=" + productId + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + productId;
 		return result;
 	}
 
@@ -43,13 +43,9 @@ public class Request {
 		if (getClass() != obj.getClass())
 			return false;
 		Request other = (Request) obj;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
+		if (productId != other.productId)
 			return false;
 		return true;
 	}
-	
 	
 }

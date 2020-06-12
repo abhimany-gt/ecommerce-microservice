@@ -35,28 +35,30 @@ public class CartService {
 
 	static Logger log = LoggerFactory.getLogger(CartService.class);
 
-	// static String username=Interceptor.username;
+	
 	public Cart addInCart(Request request) {
 
-		// call rest api of getproduct by id . here using test methodg
-
+		//find baseurl from zuul-service
 		List<ServiceInstance> instances = discoveryClient.getInstances("zuul-service");
 		String baseUrl = instances.get(0).getUri().toString();
 		String producturl = baseUrl + "/" + "products/" + request.getProductId();
+		
+		//add token in header
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.add("Authorization", "Bearer " + Interceptor.token);
-		ResponseEntity<Product> product = restTemplate.exchange(producturl, HttpMethod.GET,
+		headers.add("Authorization", "Bearer " + Interceptor.getToken());
+		
+		//call rest template /product/{id}
+		ResponseEntity<Product> response = restTemplate.exchange(producturl, HttpMethod.GET,
 				new HttpEntity<>("parameters", headers), Product.class);
-		log.info("product" + product);
-		Product prpd = product.getBody();
-
-		// Product product =getProductById(request.getProductId());
+		
+		log.info("Respnse from product/{id}: " + response);
+		// create cart object
+		Product product = response.getBody();
 		Cart cart = new Cart();
-		cart.setProductId(prpd.getId());
-		cart.setUserName(Interceptor.username);
+		cart.setProductId(product.getId());
+		cart.setUserName(Interceptor.getUsername());
 		return repository.save(cart);
-//		return new Response(user,cart,product);
 
 	}
 

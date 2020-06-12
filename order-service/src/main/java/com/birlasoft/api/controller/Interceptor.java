@@ -14,6 +14,15 @@ import io.jsonwebtoken.Jwts;
 public class Interceptor implements HandlerInterceptor{
 	static Claims claims ;
 	static String username;
+	static String token;
+	public static String getToken() {
+		return token;
+	}
+
+	public static String getUsername() {
+		return username;
+	}
+
 	static String authority;
 
 	@Override
@@ -21,7 +30,7 @@ public class Interceptor implements HandlerInterceptor{
 			throws Exception {
 		
 		String header = request.getHeader("Authorization");
-		String token = header.replace("Bearer", "");
+	           token = header.replace("Bearer", "");
 		claims = Jwts.parser()
 	             .setSigningKey("secret-key".getBytes())
 	             .parseClaimsJws(token)

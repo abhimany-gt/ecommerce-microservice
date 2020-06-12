@@ -29,12 +29,14 @@ public class CartController {
 	private CartService service;
 
 	static Logger log=LoggerFactory.getLogger(CartController.class);
+	
 	@PostMapping("/product")
 	public ResponseEntity addProductInCart(@RequestBody Request request) {
+		
 		log.info("addProductInCart  method is running");
 		log.info("Request "+request);
 
-		// authenticate user by some code
+		
 		try {
 			Cart saveCart=service.addInCart(request);
 			if(request.getProductId()!=0 && saveCart != null) {
@@ -46,9 +48,8 @@ public class CartController {
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
-		
 
-		//return new ResponseEntity<>("Product add in cart", (HttpStatus) HttpStatus.OK);
+		
 	}
 
 	@DeleteMapping("/product/{id}")
