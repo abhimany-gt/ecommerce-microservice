@@ -29,7 +29,7 @@ public class OrderService {
 	
 	public Order createOrder(Request body) {
 		String userName=body.getUserName();
-		String url="http://localhost:8181/cart/product/"+userName;
+		String url="http://localhost:7773/cart/product/";
 		Cart cart=restTemplate.getForObject(url, Cart.class);
 		Order order=new Order();
 		order.setCartId(cart.getCartId());
@@ -38,7 +38,7 @@ public class OrderService {
 		Order createdOrder=repository.save(order);
 	int cartId=createdOrder.getCartId();
 log.info("before delete method");
-	restTemplate.delete("http://localhost:8181/cart/product/{id}", cartId);
+	restTemplate.delete("http://localhost:7773/cart/product/{id}", cartId);
 	return createdOrder;
 	}
 }

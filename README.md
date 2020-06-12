@@ -104,8 +104,46 @@ Response Body:--
 
 ##### Try creating user with CLIENT role to get response as unauthorised.
 
-## 7.View turbine stream at url http://localhost:8999/turbine.stream in Google Chrome or Firefox browser
+## 7. Add Product in cart at url http://localhost:8762/cart/product using Postman Post httpmethod
 
-## 8.View log tracing Zipkin Server at url http://localhost:9411/ in Google Chrome or Firefox browser
+  Authorisation scheme :Bearer token,
+  copy jwt in token field
+  
+  Request Body:--
+  
+  {
+  
+   "productId" :"1"
+   
+  }
+  
+  ## 8. Delete product in cart at url  http://localhost:8762/cart/product/{id} using Postman Delete httpmethod
+  
+  Example url:
+  http://localhost:8762/cart/product/1  id is cartId
+  
+  Authorisation scheme :Bearer token,
+  copy jwt in token field
+  
+  Response body:--
+  
+ ## 9. Create order of product at url http://localhost:8762/order/product/ using Postman Post httpmethod
+ 
+   Authorisation scheme :Bearer token,
+   copy jwt in token field
+   
+   Request Body:--
+   
+   {
+   
+   "productId":"1"
+   
+   }
+   
+  
 
-## 9.View swagger api of user service at http://localhost:7771/swagger-ui.html to get view of extra endpoints available
+## 10.View turbine stream at url http://localhost:8999/turbine.stream in Google Chrome or Firefox browser
+
+## 11.View log tracing Zipkin Server at url http://localhost:9411/ in Google Chrome or Firefox browser
+
+## 12.View swagger api of user service at http://localhost:7771/swagger-ui.html to get view of extra endpoints available
