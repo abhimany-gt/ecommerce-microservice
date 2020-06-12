@@ -15,22 +15,22 @@ import io.jsonwebtoken.Jwts;
 
 public class Interceptor implements HandlerInterceptor{
 	static Claims claims ;
-    static String username;
+    public static String username;
 	static String authority;
-
+  public static String token;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
 		String header = request.getHeader("Authorization");
-		String token = header.replace("Bearer", "");
+		 token = header.replace("Bearer", "");
 		claims = Jwts.parser()
 	             .setSigningKey("secret-key".getBytes())
 	             .parseClaimsJws(token)
 	             .getBody();
 		username = claims.getSubject();
-		CartService.getUsername(username);
-		System.out.println(username);
+		//CartService.getUsername(username);
+		System.out.println("--------------------"+username);
         List<Map<String, String>> authoritiesMap=(List<Map<String, String>>) claims.get("auth");
         Map<String,String> map =authoritiesMap.get(0);
         authority =map.get("authority");

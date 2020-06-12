@@ -4,6 +4,8 @@ package com.birlasoft.product;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,8 @@ public class ProductController {
 		this.productRepository=productRepository;
 	}
 	
+	static Logger log=LoggerFactory.getLogger(ProductController.class);
+	
 	@GetMapping("/all")
 	public ResponseEntity<?> getAllProducts(){
 		try {
@@ -46,6 +50,9 @@ public class ProductController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable("id") Integer id){
+		
+		log.debug("@GetMapping(\"/{id}\")\r\n" + 
+				"	public ResponseEntity<?> getProductById(@PathVariable(\"id\") Integer id){");
 		try {
 			Optional<Product> product = productRepository.findById(id);
 			if(product.isPresent() == true) {

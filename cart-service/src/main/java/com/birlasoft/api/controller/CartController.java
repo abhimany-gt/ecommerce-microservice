@@ -21,7 +21,7 @@ import com.birlasoft.api.service.CartService;
 
 
 @RestController
-@RequestMapping("/cart")
+//@RequestMapping("/cart")
 
 public class CartController {
 

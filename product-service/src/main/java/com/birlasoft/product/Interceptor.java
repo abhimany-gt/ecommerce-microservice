@@ -28,7 +28,7 @@ public class Interceptor implements HandlerInterceptor{
 	             .parseClaimsJws(token)
 	             .getBody();
 		username = claims.getSubject();
-		//System.out.println(username);
+		System.out.println(username);
         List<Map<String, String>> authoritiesMap=(List<Map<String, String>>) claims.get("auth");
         Map<String,String> map =authoritiesMap.get(0);
         authority =map.get("authority");
