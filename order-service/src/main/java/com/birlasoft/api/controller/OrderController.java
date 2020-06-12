@@ -25,7 +25,7 @@ public class OrderController {
 	private OrderService service;
 	
 	
-	@PostMapping("/userName")
+	@PostMapping("/product")
 	public ResponseEntity createOrder(@RequestBody Request body) {
 		// rest call cart- service method getByUserNmae
 		/*
