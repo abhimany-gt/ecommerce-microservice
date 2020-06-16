@@ -21,38 +21,27 @@ import com.birlasoft.api.service.OrderService;
 @RestController
 //@RequestMapping("order")
 public class OrderController {
-	
+
 	@Autowired
 	private OrderService service;
-	
-	private static Logger log=LoggerFactory.getLogger(OrderController.class);
-	
+
+	private static Logger log = LoggerFactory.getLogger(OrderController.class);
+
 	@PostMapping("/product")
 	public ResponseEntity createOrder(@RequestBody Request body) {
-		// rest call cart- service method getByUserNmae
-		/*
-		 * String url="http://localhost:8181/cart/product/john";
-		 * 
-		 * //restTemplate.exchange(url,HttpMethod.POST,); restTemplate.getForEntity(url,
-		 * Object, request.getUserName());
-		 */
-		
-	//	return new ResponseEntity<>(service.createOrder(body), HttpStatus.OK);
-		
-		log.info("createOrder  method is running");
-		log.info("Request "+body);
 
-		
+		log.info("createOrder  method is running");
+		log.info("Request " + body);
+
 		try {
-			Order order=service.createOrder(body);
-			if(body.getProductId()!=0 && order != null) {
-				return new ResponseEntity<Order>(order,HttpStatus.OK);	 
-			}
-			else
-				return new ResponseEntity<String>("Product not Added in Cart Successsfully",HttpStatus.OK);
-		
+			Order order = service.createOrder(body);
+			if (body.getProductId() != 0 && order != null) {
+				return new ResponseEntity<Order>(order, HttpStatus.OK);
+			} else
+				return new ResponseEntity<String>("Product not Added in Cart Successsfully", HttpStatus.OK);
+
 		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 
