@@ -14,16 +14,18 @@ public class Cart {
 	private int cartId;
 	private int productId;
 	private String userName;
+	private double price;
 
 	public Cart() {
 		super();
 	}
 
-	public Cart(int cartId, int productId, String userName) {
+	public Cart(int cartId, int productId, String userName, double price) {
 		super();
 		this.cartId = cartId;
 		this.productId = productId;
 		this.userName = userName;
+		this.price = price;
 	}
 
 	public int getCartId() {
@@ -50,9 +52,18 @@ public class Cart {
 		this.userName = userName;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
-		return "Cart [cartId=" + cartId + ", productId=" + productId + ", userName=" + userName + "]";
+		return "Cart [cartId=" + cartId + ", productId=" + productId + ", userName=" + userName + ", price=" + price
+				+ "]";
 	}
 
 	@Override
@@ -60,6 +71,9 @@ public class Cart {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + cartId;
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + productId;
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
@@ -75,6 +89,8 @@ public class Cart {
 			return false;
 		Cart other = (Cart) obj;
 		if (cartId != other.cartId)
+			return false;
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		if (productId != other.productId)
 			return false;
