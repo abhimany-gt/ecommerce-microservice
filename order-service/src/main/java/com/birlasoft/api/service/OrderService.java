@@ -30,50 +30,49 @@ import com.birlasoft.api.repository.OrderRepository;
 @Service
 public class OrderService {
 
-	
 	@Autowired
 	private OrderRepository repository;
 	@Autowired
 	private RestTemplate restTemplate;
 	@Autowired
 	private DiscoveryClient discoveryClient;
-	
-	static Logger log=LoggerFactory.getLogger(OrderService.class);
-	
+
+	static Logger log = LoggerFactory.getLogger(OrderService.class);
+
 	public Order createOrder(Request body) {
-		
-			//find baseurl from zuul-service
-				List<ServiceInstance> instances = discoveryClient.getInstances("zuul-service");
-				String baseUrl = instances.get(0).getUri().toString();
-				String cartUrl = baseUrl + "/" + "cart/product/" + Interceptor.getUsername();
-	
-				//add token in header
-				HttpHeaders headers = new HttpHeaders();
-				headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-				headers.add("Authorization", "Bearer " + Interceptor.getToken());
-				
-				
-				/*
+
+		// find baseurl from zuul-service
+		List<ServiceInstance> instances = discoveryClient.getInstances("zuul-service");
+		String baseUrl = instances.get(0).getUri().toString();
+		String cartUrl = baseUrl + "/" + "cart/product/" + Interceptor.getUsername();
+
+		// add token in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.add("Authorization", "Bearer " + Interceptor.getToken());
+
+		/*
 		 * String userName=body.getUserName(); String
 		 * url="http://localhost:7773/cart/product/";
 		 */
-				
-				//call rest template /product/{id}
-				ResponseEntity<Cart> response = restTemplate.exchange(cartUrl, HttpMethod.GET,
-						new HttpEntity<>("parameters", headers), Cart.class);
-				
-		Cart cart=response.getBody();
-		Order order=new Order();
+
+		// call rest template /product/{id}
+		ResponseEntity<Cart> response = restTemplate.exchange(cartUrl, HttpMethod.GET,
+				new HttpEntity<>("parameters", headers), Cart.class);
+
+		Cart cart = response.getBody();
+		Order order = new Order();
 		order.setCartId(cart.getCartId());
 		order.setUserName(Interceptor.getUsername());
-		Order createdOrder=repository.save(order);
-		int cartId=createdOrder.getCartId();
+		order.setTotal(cart.getPrice());
+		Order createdOrder = repository.save(order);
+		int cartId = createdOrder.getCartId();
 		log.info("before delete method");
-		
-		String url=baseUrl+"/cart/product/";
-		
-	//restTemplate.delete("http://localhost:7773/cart/product/{id}", cartId);
-		restTemplate.exchange(url, HttpMethod.DELETE, new HttpEntity<>("parameters",headers), Void.class, cartId); 
+
+		String url = baseUrl + "/cart/product/" + cartId;
+
+		// restTemplate.delete("http://localhost:7773/cart/product/{id}", cartId);
+		restTemplate.exchange(url, HttpMethod.DELETE, new HttpEntity<>("parameters", headers), Void.class, cartId);
 		return createdOrder;
 	}
 }
