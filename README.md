@@ -34,7 +34,7 @@
   
   Request Body:-
        {"username":"rambo123",
-         "password":"passwords"}
+         "password":"password"}
  
   
 ## 4.Get All Products GET http://localhost:8762/products/all Using Postman
