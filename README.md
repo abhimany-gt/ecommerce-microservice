@@ -117,6 +117,15 @@ Response Body:--
    
   }
   
+  Response Body:--
+  
+  {
+    "cartId": 1,
+    "productId": 1,
+    "userName": "rambo123",
+    "price": 110.0
+}
+  
   ## 8. Delete product in cart at url  http://localhost:8762/cart/product/{id} using Postman Delete httpmethod
   
   Example url:
@@ -125,7 +134,7 @@ Response Body:--
   Authorisation scheme :Bearer token,
   copy jwt in token field
   
-  Response body:--
+
   
  ## 9. Create order of product at url http://localhost:8762/order/product/ using Postman Post httpmethod
  
@@ -140,6 +149,15 @@ Response Body:--
    
    }
    
+   
+   Response Body:--
+   
+   {
+    "orderId": 1,
+    "cartId": 1,
+    "userName": "rambo123",
+    "total": 110.0
+    }
   
 
 ## 10.View turbine stream at url http://localhost:8999/turbine.stream in Google Chrome or Firefox browser
